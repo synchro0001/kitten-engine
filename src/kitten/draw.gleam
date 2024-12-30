@@ -1,8 +1,7 @@
 //// This module contains functions for drawing to the canvas. It is intended
 //// for use in your `view` function. Every `view` function should start with 
 //// `draw.context`; from there, you can create a function pipe to draw all of
-//// your objects. All positions and sizes, defined as `Vec2`s from the `vec2` 
-//// module, are in world coordinates.
+//// your objects. All positions and sizes are in world coordinates.
 //// 
 //// The `Color` type and the associated functions are defined in the `color` module.
 //// 
@@ -488,4 +487,4 @@ pub fn background(ctx: Context, color: Color) -> Context {
 }
 
 @external(javascript, "../kitten_ffi.mjs", "setBackground")
-pub fn do_set_background(ctx: Context, color: String) -> Context
+fn do_set_background(ctx: Context, color: String) -> Context

@@ -11,7 +11,7 @@
 //// }
 //// ```
 
-/// Starts the engine on the canvas with the specified CSS id. The canvas width and height must be given in 
+/// Starts the engine on the canvas with the specified id. The canvas width and height must be given in 
 /// world coordinates. The canvas will automatically be stretched to occupy as much of the window as possible
 /// while preserving the aspect ratio between `canvas_width` and `canvas_height`, and adjusted when the window 
 /// is resized. Note that the margins around the canvas will be coloured when using the `draw.background` 
@@ -59,7 +59,7 @@ fn do_start_window(
   sound_sources: List(String),
 ) -> Nil
 
-/// Starts the engine on the canvas with the specified CSS id, but does not change its size. The canvas width 
+/// Starts the engine on the canvas with the specified id, but does not change its size. The canvas width 
 /// and height must be given in world coordinates. The canvas will automatically be scaled so as to fit the 
 /// world defined by `canvas_width` and `canvas_height`. For the best appearance, the ratio between these needs
 /// to match the canvas's aspect ratio.
