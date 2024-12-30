@@ -11,6 +11,8 @@ Kitten is a simple in-browser game engine, based on the HTML canvas element. It 
 
 Further documentation can be found at <https://hexdocs.pm/kitten>.
 
+Look at the examples directory on github to learn more.
+
 ## Example
 
 ```gleam
