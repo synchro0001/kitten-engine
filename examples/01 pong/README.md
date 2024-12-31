@@ -190,7 +190,7 @@ type Model {
 
 By starting with the model, we can use the Gleam compiler to minimise errors in our refactoring. 
 
-First of, all let's update our `init` function with some sensible initial values:
+First of all, let's update our `init` function with some sensible initial values:
 
 ```gleam
 fn init() {

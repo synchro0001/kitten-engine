@@ -356,7 +356,7 @@ pub fn create_texture(
   height: Int,
 ) -> Result(Texture, Nil) {
   case check_img_id(img_id) {
-    #(True, img_width, img_height)
+    Ok(#(img_width, img_height))
       if x >= 0
       && y >= 0
       && width >= 0
@@ -369,7 +369,7 @@ pub fn create_texture(
 }
 
 @external(javascript, "../kitten_ffi.mjs", "checkImgId")
-fn check_img_id(id: Int) -> #(Bool, Int, Int)
+fn check_img_id(id: Int) -> Result(#(Int, Int), Nil)
 
 /// Draws a `Texture` with its *centre* at the specified position. The texture
 /// must be created using the `create_texture` function in this module.

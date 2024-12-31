@@ -64,15 +64,15 @@ pub opaque type Sound {
 /// Fails if the desired sound does not exist. For use in the `init` function.
 pub fn new(id: Int) -> Result(Sound, Nil) {
   case do_check_type(id) {
-    #(True, 0) -> Ok(ZzFXSound(id))
-    #(True, 1) -> Ok(ZzFXMSong(id))
-    #(True, 2) -> Ok(FileSound(id))
+    Ok(0) -> Ok(ZzFXSound(id))
+    Ok(1) -> Ok(ZzFXMSong(id))
+    Ok(2) -> Ok(FileSound(id))
     _ -> Error(Nil)
   }
 }
 
 @external(javascript, "../kitten_ffi.mjs", "checkSoundType")
-fn do_check_type(id: Int) -> #(Bool, Int)
+fn do_check_type(id: Int) -> Result(Int, Nil)
 
 /// Plays the specified sound.
 pub fn play(sound: Sound) -> Nil {

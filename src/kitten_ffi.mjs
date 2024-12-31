@@ -1,3 +1,177 @@
+import { Ok as $Ok, Error as $Error } from "../prelude.mjs";
+
+////////// engine //////////
+
+let images = [];
+let sounds = {};
+let lastTime = 0;
+let deltaTime;
+
+function startEngine(init, update, view, imageSources, soundSources) {
+  // run on every frame
+  function gameLoop(timestamp, model) {
+    const _deltaTime = timestamp - lastTime;
+    // caps fps at 60
+    if (_deltaTime > 16.6) {
+      deltaTime = _deltaTime;
+      view(model);
+      const updatedModel = update(model);
+      lastTime = timestamp;
+      clearInput();
+      requestAnimationFrame((t) => gameLoop(t, updatedModel));
+    } else {
+      requestAnimationFrame((t) => gameLoop(t, model));
+    }
+  }
+
+  // Setting up canvas
+  const canvas = document.getElementById(canvasId);
+  canvas.getContext("2d").imageSmoothingEnabled = false; // prevent blurry textures
+  canvas.style.display = "block";
+
+  // Initialising input, images, and sounds
+  initKeyInput();
+  initMouseInput();
+
+  // Loading images
+  const imagePromises = imageSources.toArray().map(
+    (src, imgId) =>
+      new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => {
+          images[imgId] = image;
+          resolve();
+        };
+        image.onerror = () => {
+          console.error(`Failed to load image ${imgId}`);
+        };
+        image.src = src;
+      })
+  );
+
+  // Loading sounds
+  const soundPromises = soundSources.toArray().map(async (source, index) => {
+    if (source.endsWith(".js")) {
+      try {
+        await renderZzFXMSong(source, index);
+      } catch (_error) {
+        await renderZzFXSound(source, index);
+      }
+    } else {
+      await renderFileSound(source, index);
+    }
+  });
+
+  // Starting engine
+  Promise.all([Promise.all(imagePromises), Promise.all(soundPromises)])
+    .then(() => {
+      const initialModel = init();
+      requestAnimationFrame((t) => gameLoop(t, initialModel));
+    })
+    .catch((error) => {
+      console.error("Failed to start engine:", error);
+    });
+}
+
+export function getDeltaTime() {
+  return (deltaTime * 60) / 1000;
+}
+
+////////// canvas //////////
+
+let canvasId;
+let canvasWidth;
+let canvasHeight;
+let canvasScale;
+
+export function startWindow(
+  init,
+  update,
+  view,
+  _canvasId,
+  _canvasWidth,
+  _canvasHeight,
+  imageSources,
+  soundSources
+) {
+  document.body.style.margin = "0";
+  document.body.style.padding = "0";
+  document.body.style.overflow = "hidden";
+
+  document.documentElement.style.margin = "0";
+  document.documentElement.style.padding = "0";
+  document.documentElement.style.overflow = "hidden";
+
+  document.getElementById(_canvasId).style.position = "absolute";
+
+  canvasId = _canvasId;
+  canvasWidth = _canvasWidth;
+  canvasHeight = _canvasHeight;
+  resizeCanvas();
+  window.addEventListener("resize", () => resizeCanvas());
+
+  startEngine(init, update, view, imageSources, soundSources);
+}
+
+function resizeCanvas() {
+  const canvas = document.getElementById(canvasId);
+  if (canvasWidth / canvasHeight >= window.innerWidth / window.innerHeight) {
+    canvas.width = window.innerWidth;
+    canvasScale = window.innerWidth / canvasWidth;
+    canvas.height = canvasHeight * canvasScale;
+    canvas.style.top = `${(window.innerHeight - canvas.height) / 2}px`;
+    canvas.style.left = `0px`;
+  } else {
+    canvas.height = window.innerHeight;
+    canvasScale = window.innerHeight / canvasHeight;
+    canvas.width = canvasWidth * canvasScale;
+    canvas.style.top = `0px`;
+    canvas.style.left = `${(window.innerWidth - canvas.width) / 2}px`;
+  }
+  canvas.getContext("2d").imageSmoothingEnabled = false;
+}
+
+export function startEmbedded(
+  init,
+  update,
+  view,
+  _canvasId,
+  _canvasWidth,
+  _canvasHeight,
+  imageSources,
+  soundSources
+) {
+  canvasId = _canvasId;
+  const canvas = document.getElementById(canvasId);
+  if (_canvasWidth / _canvasHeight >= canvas.width / canvas.height) {
+    canvasScale = canvas.width / _canvasWidth;
+  } else {
+    canvasScale = canvas.height / _canvasHeight;
+  }
+  startEngine(init, update, view, imageSources, soundSources);
+}
+
+export function toggleFullscreen(toggle) {
+  const canvas = document.getElementById(canvasId);
+  if (toggle) {
+    if (canvas.requestFullscreen) {
+      canvas.requestFullscreen();
+    } else if (canvas.webkitRequestFullscreen) {
+      canvas.webkitRequestFullscreen(); // Safari support
+    } else if (canvas.msRequestFullscreen) {
+      canvas.msRequestFullscreen(); // IE11 support
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen(); // Safari support
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen(); // IE11 support
+    }
+  }
+}
+
 ////////// key //////////
 
 let keyInput = {};
@@ -219,6 +393,7 @@ export function drawText(ctx, text, cx, cy, size, weight, font, tilt, color) {
 
 export function drawTexture(ctx, imgId, sx, sy, sw, sh, dx, dy, dw, dh, tilt) {
   ctx.save();
+  // inverting the y-axis, otherwise image appears flipped
   ctx.scale(1, -1);
   ctx.translate(dx, -dy);
   ctx.rotate(tilt);
@@ -253,182 +428,13 @@ export function setBackground(ctx, color) {
 
 export function checkImgId(id) {
   if (id >= 0 && images.length - 1 >= id) {
-    return [true, images[id].width, images[id].height];
+    return new $Ok([images[id].width, images[id].height]);
   } else {
-    return [false, 0, 0];
+    return new $Error(null);
   }
 }
 
-////////// canvas //////////
-
-let canvasId;
-let canvasWidth;
-let canvasHeight;
-let canvasScale;
-
-export function startWindow(
-  init,
-  update,
-  view,
-  _canvasId,
-  _canvasWidth,
-  _canvasHeight,
-  imageSources,
-  soundSources
-) {
-  document.body.style.margin = "0";
-  document.body.style.padding = "0";
-  document.body.style.overflow = "hidden";
-
-  document.documentElement.style.margin = "0";
-  document.documentElement.style.padding = "0";
-  document.documentElement.style.overflow = "hidden";
-
-  document.getElementById(_canvasId).style.position = "absolute";
-
-  canvasId = _canvasId;
-  canvasWidth = _canvasWidth;
-  canvasHeight = _canvasHeight;
-  resizeCanvas();
-  window.addEventListener("resize", () => resizeCanvas());
-
-  startEngine(init, update, view, imageSources, soundSources);
-}
-
-function resizeCanvas() {
-  const canvas = document.getElementById(canvasId);
-  if (canvasWidth / canvasHeight >= window.innerWidth / window.innerHeight) {
-    canvas.width = window.innerWidth;
-    canvasScale = window.innerWidth / canvasWidth;
-    canvas.height = canvasHeight * canvasScale;
-    canvas.style.top = `${(window.innerHeight - canvas.height) / 2}px`;
-    canvas.style.left = `0px`;
-  } else {
-    canvas.height = window.innerHeight;
-    canvasScale = window.innerHeight / canvasHeight;
-    canvas.width = canvasWidth * canvasScale;
-    canvas.style.top = `0px`;
-    canvas.style.left = `${(window.innerWidth - canvas.width) / 2}px`;
-  }
-  canvas.getContext("2d").imageSmoothingEnabled = false;
-}
-
-export function startEmbedded(
-  init,
-  update,
-  view,
-  _canvasId,
-  _canvasWidth,
-  _canvasHeight,
-  imageSources,
-  soundSources
-) {
-  canvasId = _canvasId;
-  const canvas = document.getElementById(canvasId)
-  if (_canvasWidth / _canvasHeight >= canvas.width / canvas.height) {
-    canvasScale = canvas.width / _canvasWidth;
-  } else {
-    canvasScale = canvas.height / _canvasHeight;
-  }
-  startEngine(init, update, view, imageSources, soundSources);
-}
-
-export function toggleFullscreen(toggle) {
-  const canvas = document.getElementById(canvasId);
-  if (toggle) {
-    if (canvas.requestFullscreen) {
-      canvas.requestFullscreen();
-    } else if (canvas.webkitRequestFullscreen) {
-      canvas.webkitRequestFullscreen(); // Safari support
-    } else if (canvas.msRequestFullscreen) {
-      canvas.msRequestFullscreen(); // IE11 support
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen(); // Safari support
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen(); // IE11 support
-    }
-  }
-}
-
-////////// engine //////////
-
-let images = [];
-let sounds = {};
-let lastTime = 0;
-let deltaTime;
-
-function startEngine(init, update, view, imageSources, soundSources) {
-  function gameLoop(timestamp, model) {
-    const _deltaTime = timestamp - lastTime;
-    if (_deltaTime > 16.6) {
-      deltaTime = _deltaTime;
-      // console.log(deltaTime)
-      view(model);
-      const updatedModel = update(model);
-      lastTime = timestamp;
-      clearInput();
-      requestAnimationFrame((t) => gameLoop(t, updatedModel));
-    } else {
-      requestAnimationFrame((t) => gameLoop(t, model));
-    }
-  }
-
-  // Setting up canvas
-  const canvas = document.getElementById(canvasId);
-  canvas.getContext("2d").imageSmoothingEnabled = false;
-  canvas.style.display = "block";
-
-  // Initialising input, images, and sounds
-  initKeyInput();
-  initMouseInput();
-
-  // Loading images
-  const imagePromises = imageSources.toArray().map(
-    (src, imgId) =>
-      new Promise((resolve) => {
-        const image = new Image();
-        image.onload = () => {
-          images[imgId] = image;
-          resolve();
-        };
-        image.onerror = () => {
-          console.error(`Failed to load image ${imgId}`);
-        };
-        image.src = src;
-      })
-  );
-
-  // Loading sounds
-  const soundPromises = soundSources.toArray().map(async (source, index) => {
-    if (source.endsWith(".js")) {
-      try {
-        await renderZzFXMSong(source, index);
-      } catch (_error) {
-        await renderZzFXSound(source, index);
-      }
-    } else {
-      await renderFileSound(source, index);
-    }
-  });
-
-  // Starting engine
-  Promise.all([Promise.all(imagePromises), Promise.all(soundPromises)])
-    .then(() => {
-      const initialModel = init();
-      requestAnimationFrame((t) => gameLoop(t, initialModel));
-    })
-    .catch((error) => {
-      console.error("Failed to start engine:", error);
-    });
-}
-
-export function getDeltaTime() {
-  return deltaTime * 60 / 1000;
-}
+////////// input (general) //////////
 
 function clearInput() {
   for (const key in keyInput) {
@@ -476,7 +482,7 @@ export function atan2(y, x) {
   return Math.atan2(y, x);
 }
 
-////////// sound //////////
+////////// ZzFX & ZzFXM //////////
 
 // zzfx() - the universal entry point -- returns a AudioBufferSourceNode
 const zzfx = (...t) => zzfxP(zzfxG(...t));
@@ -650,19 +656,25 @@ const zzfxM = (n, f, t, e = 125) => {
   return [b, j];
 };
 
-// does not seem to be necessary
-// function initSoundContext() {
-//   if (zzfxX.state !== "running") {
-//     zzfxX.resume();
-//     console.log("AudioContext initialized.");
-//   }
-// }
+////////// sound //////////
+
+// render functions run on engine init
+// play sounds run at runtime
 
 // store info about the type of each sound:
 // 0 = ZzFXSound
 // 1 = ZzFXMSong
 // 2 = FileSound (wav, mp3)
 let soundTypes = [];
+
+// check that the sound exists and return its type
+export function checkSoundType(id) {
+  if (soundTypes[id] || soundTypes[id] === 0) {
+    return new $Ok(soundTypes[id]);
+  } else {
+    return new $Error(null);
+  }
+}
 
 async function renderZzFXMSong(source, i) {
   const songFile = await fetch(source);
@@ -724,14 +736,6 @@ export async function stopSound() {
 
 export function playZzFXSound(id) {
   zzfxP(sounds[id]);
-}
-
-export function checkSoundType(id) {
-  if (soundTypes[id] || soundTypes[id] === 0) {
-    return [true, soundTypes[id]];
-  } else {
-    return [false, -1];
-  }
 }
 
 async function renderFileSound(source, i) {

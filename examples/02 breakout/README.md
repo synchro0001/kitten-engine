@@ -255,7 +255,7 @@ type Palette {
 }
 ```
 
-At this point, the game is playable, but we can take it a step further. Let's add a "You win!" screen that will display once the player has destroyed every block. We could add a boolean `has_won` to our model like we did in the pong example, but our state machine provides a better way: let's simply expand our `PlayerState` type with a new type, `HasWon`. Now, we will enter this state from the `Idle` state if every block has been broken, and if the player is already in the `HasWon` state, we do not need to update the model. 
+At this point, the game is playable, but we can take it a step further. Let's add a "You win!" screen that will display once the player has destroyed every block. We could add a boolean `has_won` to our model like we did in the pong example, but our state machine provides a better way: let's simply expand our `PlayerState` type with a new variant, `HasWon`. Now, we will enter this state from the `Idle` state if every block has been broken, and if the player is already in the `HasWon` state, we do not need to update the model. 
 
 ```gleam
 // inside the update() function
