@@ -98,7 +98,7 @@ To learn more about how the engine works, I suggest you look at the `examples` d
 The engine is far from complete at the moment. Particularly on the javascript side, the code is simply a mess of everything that I could get to work from other projects and ChatGPT. I am also not too happy with some of the modules, so expect changes in the near future. 
 
 Here are some things that I would like to add to the engine, but so far haven't figured out how to implement them or how they would fit in: 
-- [ ] a more consistent and general `simulate` module with higher-order abstractions and optimisations
+- [ ] a more consistent and general `simulate` module with higher-order abstractions and optimisations; possibly a lookahead collision system to prevent glitches
 - [ ] shaders (with WebGL)
 - [ ] effects, like in [Lustre](https://github.com/lustre-labs/lustre), for tasks like communicating with a server; possible even a Lustre integration
 - [ ] better documentation and a partial rewrite of the javascript code
