@@ -3,7 +3,7 @@
 //// should be preferable as it  automatically stretches your canvas to the size of the window and 
 //// updates it when the window is resized.
 //// 
-//// ## Example:
+//// ### Example:
 //// 
 //// ```gleam
 //// pub fn main() {

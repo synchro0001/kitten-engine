@@ -2,7 +2,7 @@
 //// These are intended for use inside your `update` function.
 //// The custom `Button` types ensures that you can only check for real buttons and prevents misspellings.
 //// 
-//// ## Example: 
+//// ### Example: 
 //// 
 //// ```gleam
 //// let new_pos = case mouse.was_pressed(mouse.LMB) && mouse.pos().x >=. 0.0 {

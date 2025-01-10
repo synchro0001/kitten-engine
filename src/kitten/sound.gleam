@@ -23,7 +23,7 @@
 //// a sound. In my testing with Firefox, it was sufficient that the user had pressed a key or clicked 
 //// with their mouse at any point before the sound was played.
 //// 
-//// ## Example:
+//// ### Example:
 //// 
 //// ```gleam
 //// pub fn main() {

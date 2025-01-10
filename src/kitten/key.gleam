@@ -3,7 +3,7 @@
 //// The custom `Key` types ensures that you can only check for real keys and prevents misspellings.
 //// Use `key.ANY` to check if any key was pressed, released or was down during a frame.
 //// 
-//// ## Example: 
+//// ### Example: 
 //// 
 //// ```gleam
 //// let new_pos = case key.is_down(key.A) {

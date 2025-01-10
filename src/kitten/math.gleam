@@ -23,7 +23,7 @@ pub const pi = 3.1415926535
 /// Linearly interpolates between two numbers. Think of the result as the number 
 /// `100 * p` percent of the way between `a` and `b`.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// math.lerp(10.0, 20.0, 0.3)
@@ -35,7 +35,7 @@ pub fn lerp(a: Float, b: Float, p: Float) -> Float {
 
 /// Returns `1.0` for positive numbers, `-1.0` for negative numbers and `0.0` for `0.0`.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// math.sign(-22.8)

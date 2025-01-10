@@ -1,7 +1,7 @@
 //// This module defines a simple two-dimensional vector type and some helper functions to manipulate these vectors.
 //// These are used throughout the engine.
 //// 
-//// ## Examples: 
+//// ### Examples: 
 //// 
 //// ```gleam
 //// let v1 = Vec2(10.0, 20.0)
@@ -26,7 +26,7 @@ pub type Vec2 {
 
 /// Adds two vectors component-wise.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.add(Vec2(10.0, 20.0), Vec2(5.0, -12.0))
@@ -38,7 +38,7 @@ pub fn add(v1: Vec2, v2: Vec2) -> Vec2 {
 
 /// Subtracts two vectors component-wise.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.subtract(Vec2(10.0, 20.0), Vec2(5.0, -12.0))
@@ -50,7 +50,7 @@ pub fn subtract(v1: Vec2, v2: Vec2) -> Vec2 {
 
 /// Multiplies two vectors component-wise.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.multiply(Vec2(10.0, 20.0), Vec2(5.0, -12.0))
@@ -62,7 +62,7 @@ pub fn multiply(v1: Vec2, v2: Vec2) -> Vec2 {
 
 /// Calculates the [dot product](https://en.wikipedia.org/wiki/Dot_product) of two vectors.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.dot_product(Vec2(10.0, 20.0), Vec2(5.0, -12.0))
@@ -75,7 +75,7 @@ pub fn dot_product(v1: Vec2, v2: Vec2) -> Float {
 /// Linearly interpolates between two vectors. 
 /// Think of the reult as the point `100 * p` percent along the line between them.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.lerp(Vec2(10.0, 20.0), Vec2(5.0, -12.0), 0.3)
@@ -88,7 +88,7 @@ pub fn lerp(v1: Vec2, v2: Vec2, p: Float) -> Vec2 {
 /// Calculates the length / magnitude of a vector squared. 
 /// Useful to make length comparisons slightly cheaper computationally.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.length_squared(Vec2(4.0, 3.0))
@@ -100,7 +100,7 @@ pub fn length_squared(v: Vec2) -> Float {
 
 /// Calculates the length / magnitude of a vector.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.length(Vec2(4.0, 3.0))
@@ -113,7 +113,7 @@ pub fn length(v: Vec2) -> Float {
 
 /// Scales the vector by the given factor. Works for all `Float`s.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.scale(Vec2(4.0, 3.0), 2.0)
@@ -125,7 +125,7 @@ pub fn scale(v: Vec2, factor: Float) -> Vec2 {
 
 /// Calculates the distance between the endpoints of two vectors.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.dist(Vec2(4.0, 3.0), Vec2(8.0, 6.0))
@@ -138,7 +138,7 @@ pub fn dist(v1: Vec2, v2: Vec2) -> Float {
 /// Returns a unit vector (i.e. vector of length `1.0`) in the given direction, 
 /// `t` *radians* from the positive x-direction counterclockwise.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.length_squared(Vec2(4.0, 3.0))
@@ -152,7 +152,7 @@ pub fn unit(t: Float) -> Vec2 {
 /// 
 /// Useful in function pipes.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.unit_x()
@@ -166,7 +166,7 @@ pub fn unit_x() -> Vec2 {
 /// 
 /// Useful in function pipes.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.unit_y()
@@ -178,7 +178,7 @@ pub fn unit_y() -> Vec2 {
 
 /// Returns a unit vector a random direction.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.unit_random()
@@ -190,7 +190,7 @@ pub fn unit_random() -> Vec2 {
 
 /// Returns the vector that has the same direction as the original and the specified length.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.set_length(Vec2(6.0, 8.0), 1.0)
@@ -202,7 +202,7 @@ pub fn set_length(v: Vec2, new_length: Float) -> Vec2 {
 
 /// Clamps the length of a vector between a minimum and a maximum.
 ///  
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// vec2.clamp_length(Vec2(6.0, 8.0), 1.0, 4.0)
@@ -218,7 +218,7 @@ pub fn clamp_length(v: Vec2, min_length: Float, max_length: Float) -> Vec2 {
 
 /// Clamps the vector component-wise between a minimum and a maximum.
 ///  
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// Vec2(6.0, 8.0)
@@ -235,7 +235,7 @@ pub fn clamp(v: Vec2, min: Vec2, max: Vec2) -> Vec2 {
 
 /// Returns the normal vector (i.e. of length 1) in the same direction as the original.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.normalize(Vec2(6.0, 8.0))
@@ -248,7 +248,7 @@ pub fn normalize(v: Vec2) -> Vec2 {
 /// Calculates the angle, in *radians*, 
 /// that the given vector makes with the positive x-direction counterclockwise.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.angle(Vec2(1.0, 2.0))
@@ -260,7 +260,7 @@ pub fn angle(v: Vec2) -> Float {
 
 /// Rotates the vector through the given angle, in *radians*, counterclockwise.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.rotate(Vec2(1.0, 2.0), 0.4636483268)
@@ -275,7 +275,7 @@ pub fn rotate(v: Vec2, t: Float) -> Vec2 {
 /// Returns the vector with the same length as the original, 
 /// rotated through the angle `t` *radians* counterclockwise away from the positive x-direction.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.set_angle(Vec2(1.0, 2.0), math.pi /. 2.0)
@@ -290,7 +290,7 @@ pub fn set_angle(v: Vec2, t: Float) -> Vec2 {
 ///
 /// Useful in function pipes. 
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.rotate_left(Vec2(1.0, 2.0))
@@ -304,7 +304,7 @@ pub fn rotate_left(v: Vec2) -> Vec2 {
 /// 
 /// Useful in function pipes. 
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.rotate_right(Vec2(1.0, 2.0))
@@ -316,7 +316,7 @@ pub fn rotate_right(v: Vec2) -> Vec2 {
 
 /// Returns the vector with its direction flipped.
 ///  
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.invert(Vec2(1.0, 2.0))
@@ -330,7 +330,7 @@ pub fn invert(v: Vec2) -> Vec2 {
 /// similar to `float.loosely_equals`. 
 /// The comparison is made component-wise.
 ///  
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// vec2.loosely_equals(Vec2(1.0, 2.0), Vec2(1.01, 2.01), 0.05)
@@ -348,7 +348,7 @@ pub fn loosely_equals(v1: Vec2, v2: Vec2, precision: Float) -> Bool {
 /// 
 /// Useful in function pipes for extra type safety and readability.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.id(Vec2(1.0, 2.0))
@@ -362,7 +362,7 @@ pub fn id(v: Vec2) -> Vec2 {
 /// 
 /// Useful in function pipes, but prefer to use the actual constructor otherwise.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.from_tuple(6.0, 8.0)
@@ -376,7 +376,7 @@ pub fn from_tuple(x_y: #(Float, Float)) -> Vec2 {
 ///  
 /// Useful in function pipes.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.to_tuple(Vec2(6.0, 8.0))
@@ -390,7 +390,7 @@ pub fn to_tuple(v: Vec2) -> #(Float, Float) {
 /// 
 /// Useful in function pipes, but prefer to use the `v.x` syntax otherwise.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.get_x(Vec2(6.0, 8.0))
@@ -404,7 +404,7 @@ pub fn get_x(v: Vec2) -> Float {
 /// 
 /// Useful in function pipes, but prefer to use the `v.y` syntax otherwise.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.get_y(Vec2(6.0, 8.0))
@@ -418,7 +418,7 @@ pub fn get_y(v: Vec2) -> Float {
 /// 
 /// Useful in function pipes.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.set_x(Vec2(6.0, 8.0), 3.0)
@@ -432,7 +432,7 @@ pub fn set_x(v: Vec2, new_x: Float) -> Vec2 {
 /// 
 /// Useful in function pipes.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// vec2.set_y(Vec2(6.0, 8.0), 5.0)
@@ -444,7 +444,7 @@ pub fn set_y(v: Vec2, new_y: Float) -> Vec2 {
 
 /// Clamps the x-component of the vector between a minimum and a maximum.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// vec2.clamp_x(Vec2(6.0, 8.0), 3.0, 5.0)
@@ -460,7 +460,7 @@ pub fn clamp_x(v: Vec2, min_x: Float, max_x: Float) -> Vec2 {
 
 /// Clamps the y-component of the vector between a minimum and a maximum.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// vec2.clamp_y(Vec2(6.0, 8.0), 5.0, 7.0)

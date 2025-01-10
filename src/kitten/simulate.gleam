@@ -15,7 +15,7 @@ import kitten/vec2.{type Vec2, Vec2}
 /// Sharing an edge or a corner but no inner space counts as an overlap.
 ///  
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// simulate.is_overlapping(Vec2(0.0, 0.0), Vec2(10.0, 10.0), Vec2(5.0, 5.0), Vec2(10.0, 10.0))
@@ -37,7 +37,7 @@ pub fn is_overlapping(
 /// Checks if a point lies within the rectangle, defined by its *centre* and size.
 /// If the point lies on the edge of the rectangle, it is considered to be within it.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// simulate.is_within(Vec2(0.0, 0.0), Vec2(0.0, 0.0), Vec2(10.0, 10.0))
@@ -53,7 +53,7 @@ pub fn is_within(point point: Vec2, pos pos: Vec2, size size: Vec2) -> Bool {
 /// Adjusts the position of an object by adding its velocity to it. Returns *only the new position*.
 /// A simple alias for `vec2.add` that takes `delta_time` into account.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// simulate.move(Vec2(0.0, 5.0), Vec2(10.0, 0.0))
@@ -275,7 +275,7 @@ fn do_screen_to_world(x: Float, y: Float) -> #(Float, Float)
 /// defined by its *centre* position and size. Uses a slightly unoptimised
 /// Liang-Barsky algorithm.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// is_intersecting(Vec2(0.0, -100.0), Vec2(0.0, 100.0), Vec2(0.0, 0.0), Vec2(100.0, 100.0))

@@ -5,7 +5,7 @@
 //// 
 //// The `Color` type and the associated functions are defined in the `color` module.
 //// 
-//// ## Example: 
+//// ### Example: 
 //// 
 //// ```gleam
 //// fn view(model: Model) {
@@ -25,7 +25,7 @@ pub type Context
 /// Returns the 2D context of the canvas that you initiated the engine with.
 /// Every `view` function should start with this.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// fn view(model: Model) {
@@ -40,7 +40,7 @@ pub fn context() -> Context
 
 /// Draws a straight line between two points.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -72,7 +72,7 @@ fn do_draw_line(
 /// Use the `path` and `polygon` functions to create non-filled or tilted 
 /// rectangles and other shapes.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -99,7 +99,7 @@ fn do_draw_rect(
 
 /// Draws a circle with its centre at the specified position.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -129,7 +129,7 @@ fn do_draw_circle(
 /// of the HTML canvas, but should rarely be used on its own. Prefer the 
 /// `circle` function for simple use cases or write wrappers around this one. 
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -190,7 +190,7 @@ fn do_draw_ellipse(
 /// Draws some text with its *centre* at the specified position. 
 /// The tilt must be given in radians.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -237,7 +237,7 @@ fn do_draw_text(
 /// 
 /// This function can be used to draw custom non-filled polygons.
 /// 
-/// ## Examples: 
+/// ### Examples: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -286,7 +286,7 @@ fn do_draw_path(
 /// This function can be used to draw custom filled polygons.
 /// 
 /// 
-/// ## Examples: 
+/// ### Examples: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -337,7 +337,7 @@ pub opaque type Texture {
 /// your model. This way, you can be sure that if your game starts without errors,
 /// the texture is correct.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// fn init() {
@@ -375,7 +375,7 @@ fn check_img_id(id: Int) -> Result(#(Int, Int), Nil)
 /// must be created using the `create_texture` function in this module.
 /// The tilt must be given in radians.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function
@@ -422,7 +422,7 @@ fn do_draw_texture(
 /// at the start of your `view` function and *before* setting the camera 
 /// scale and rotation.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// fn view(model: Model) {
@@ -445,7 +445,7 @@ fn do_set_camera_pos(
 /// Sets the scale of the camera. Always call this at the start of your `view`
 /// function and *after* setting the camera position.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// fn view(model: Model) {
@@ -461,7 +461,7 @@ pub fn set_camera_scale(ctx: Context, new_scale: Float) -> Context
 /// Sets the rotation of the camera in *radians*. Always call this at the start 
 /// of your `view` function and *after* setting the camera position.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// fn view(model: Model) {
@@ -476,7 +476,7 @@ pub fn set_camera_angle(ctx: Context, new_angle: Float) -> Context
 
 /// Sets the background colour of the canvas.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// // inside a view() function

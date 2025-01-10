@@ -13,7 +13,7 @@
 //// you can be sure that if your game starts without errors, the colours 
 //// are correct.
 //// 
-//// ## Examples
+//// ### Examples
 //// 
 //// ```gleam
 //// // inside a view() function
@@ -51,7 +51,7 @@ pub opaque type Color {
 
 /// Returns the R value of the colour in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -64,7 +64,7 @@ pub fn get_r(color: Color) -> Int {
 
 /// Returns the G value of the colour in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -77,7 +77,7 @@ pub fn get_g(color: Color) -> Int {
 
 /// Returns the B value of the colour in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -90,7 +90,7 @@ pub fn get_b(color: Color) -> Int {
 
 /// Returns the transparency (A) value of the colour.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -104,7 +104,7 @@ pub fn get_a(color: Color) -> Float {
 /// Sets the R value of the colour in RGB encoding. 
 /// R must be between 0 and 255, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -118,7 +118,7 @@ pub fn set_r(color: Color, new_r: Int) -> Result(Color, Nil) {
 /// Sets the G value of the colour in RGB encoding.
 /// G must be between 0 and 255, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -132,7 +132,7 @@ pub fn set_g(color: Color, new_g: Int) -> Result(Color, Nil) {
 /// Sets the B value of the colour in RGB encoding.
 /// G must be between 0 and 255, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -146,7 +146,7 @@ pub fn set_b(color: Color, new_b: Int) -> Result(Color, Nil) {
 /// Sets the transparency (A) value of the colour.
 /// A must be between 0.0 and 1.0, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -161,7 +161,7 @@ pub fn set_a(color: Color, new_a: Float) -> Result(Color, Nil) {
 /// automatically set to 1.0. The values must be between 0 and 255,
 /// otherwise the function fails.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// color.from_rgb(237, 42, 172)
@@ -181,7 +181,7 @@ pub fn from_rgb(r: Int, g: Int, b: Int) -> Result(Color, Nil) {
 /// R, G and B must be between 0 and 255 and A between 0.0 and 1.0, 
 /// otherwise the function fails.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// color.from_rgba(237, 42, 172, 0.8)
@@ -208,7 +208,7 @@ pub fn from_rgba(r: Int, g: Int, b: Int, a: Float) -> Result(Color, Nil) {
 
 /// Converts a `Color` to its R, G and B values in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -221,7 +221,7 @@ pub fn to_rgb(color: Color) -> #(Int, Int, Int) {
 
 /// Converts a `Color` to its R, G, B and A values in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -234,7 +234,7 @@ pub fn to_rgba(color: Color) -> #(Int, Int, Int, Float) {
 
 /// Returns the H value of the colour in HSL encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -247,7 +247,7 @@ pub fn get_h(color: Color) -> Int {
 
 /// Returns the S value of the colour in HSL encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -260,7 +260,7 @@ pub fn get_s(color: Color) -> Int {
 
 /// Returns the L value of the colour in HSL encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -274,7 +274,7 @@ pub fn get_l(color: Color) -> Int {
 /// Sets the H value of the colour in HSL encoding.
 /// H must be between 0 and 359, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -289,7 +289,7 @@ pub fn set_h(color: Color, new_h: Int) -> Result(Color, Nil) {
 /// Sets the S value of the colour in HSL encoding.
 /// S must be between 0 and 100, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -304,7 +304,7 @@ pub fn set_s(color: Color, new_s: Int) -> Result(Color, Nil) {
 /// Sets the L value of the colour in HSL encoding.
 /// L must be between 0 and 100, otherwise the function fails.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -318,7 +318,7 @@ pub fn set_l(color: Color, new_l: Int) -> Result(Color, Nil) {
 
 /// Converts a `Color` to its H, S and L values in HSL encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -363,7 +363,7 @@ pub fn to_hsl(color: Color) -> #(Int, Int, Int) {
 
 /// Converts a `Color` to its H, S, L and A values in HSL encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -379,7 +379,7 @@ pub fn to_hsla(color: Color) -> #(Int, Int, Int, Float) {
 /// automatically set to 1.0. H must be between 0 and 359, and S and L
 /// between 0 and 100, otherwise the function fails.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// color.from_hsl(240, 90, 80)
@@ -420,7 +420,7 @@ pub fn from_hsl(h: Int, s: Int, l: Int) -> Result(Color, Nil) {
 /// H must be between 0 and 359, S and L between 0 and 100, and A 
 /// between 0.0 and 1.0, otherwise the function fails.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// color.from_hsla(240, 90, 80, 0.8)
@@ -438,7 +438,7 @@ pub fn from_hsla(h: Int, s: Int, l: Int, a: Float) -> Result(Color, Nil) {
 
 /// Converts a `Color` to a hex string of the form "#RRGGBB" in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -454,7 +454,7 @@ pub fn to_hex(color: Color) -> String {
 
 /// Converts a `Color` to a hex string of the form "#RRGGBBAA" in RGB encoding.
 /// 
-/// ## Example:
+/// ### Example:
 /// 
 /// ```gleam
 /// color.fuchsia_450
@@ -474,7 +474,7 @@ pub fn to_hexa(color: Color) -> String {
 /// with R, G and B values in RGB encoding and A automatically set to 1.0. 
 /// The values must be between 0 and 255, otherwise the function fails.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// color.from_hex("#ED2AAC"))
@@ -499,7 +499,7 @@ pub fn from_hex(hex_string: String) -> Result(Color, Nil) {
 /// with R, G, and B values in RGB encoding. R, G, B and A must be 
 /// between 0 and 255 otherwise the function fails.
 /// 
-/// ## Examples:
+/// ### Examples:
 /// 
 /// ```gleam
 /// color.from_hexa("#ED2AACFF"))
@@ -524,7 +524,7 @@ pub fn from_hexa(hex_string: String) -> Result(Color, Nil) {
 /// Returns a random color. The R, G and B values are picked randomly,
 /// but A is always set to 1.0.
 /// 
-/// ## Example: 
+/// ### Example: 
 /// 
 /// ```gleam
 /// color.random()
