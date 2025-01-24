@@ -1,6 +1,6 @@
 # Kitten
 
-[![Package Version](https://img.shields.io/hexpm/v/net)](https://hex.pm/packages/kitten)
+[![Package Version](https://img.shields.io/hexpm/v/kitten)](https://hex.pm/packages/kitten)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/kitten/)
 
 ```sh
