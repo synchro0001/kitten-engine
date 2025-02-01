@@ -1,3 +1,6 @@
+## v0.0.5
+- Added a few utility functions to the `vec2` module.
+
 ## v0.0.4
 - The "example" headings in docs were changed from h2 to h3.
 
