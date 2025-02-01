@@ -473,3 +473,51 @@ pub fn clamp_y(v: Vec2, min_y: Float, max_y: Float) -> Vec2 {
   float.clamp(v.y, min_y, max_y)
   |> set_y(v, _)
 }
+
+/// Increases the vector's x-component by a specified amount.
+/// 
+/// ### Example:
+/// 
+/// ```gleam
+/// vec2.add_x(Vec2(6.0, 8.0), 5.0)
+/// // -> Vec2(11.0, 8.0)
+/// ```
+pub fn add_x(v: Vec2, dx: Float) -> Vec2 {
+  Vec2(v.x +. dx, v.y)
+}
+
+/// Increases the vector's y-component by a specified amount.
+/// 
+/// ### Example:
+/// 
+/// ```gleam
+/// vec2.add_y(Vec2(6.0, 8.0), 5.0)
+/// // -> Vec2(6.0, 13.0)
+/// ```
+pub fn add_y(v: Vec2, dy: Float) -> Vec2 {
+  Vec2(v.x, v.y +. dy)
+}
+
+/// Decreases the vector's x-component by a specified amount.
+/// 
+/// ### Example:
+/// 
+/// ```gleam
+/// vec2.subtract_x(Vec2(6.0, 8.0), 5.0)
+/// // -> Vec2(1.0, 8.0)
+/// ```
+pub fn subtract_x(v: Vec2, dx: Float) -> Vec2 {
+  Vec2(v.x -. dx, v.y)
+}
+
+/// Decreases the vector's y-component by a specified amount.
+/// 
+/// ### Example:
+/// 
+/// ```gleam
+/// vec2.subtract_y(Vec2(6.0, 8.0), 5.0)
+/// // -> Vec2(6.0, 3.0)
+/// ```
+pub fn subtract_y(v: Vec2, dy: Float) -> Vec2 {
+  Vec2(v.x, v.y -. dy)
+}
