@@ -3,7 +3,7 @@
 //// by Frank Force and Keith Clark
 //// - the usual Web Audio API (so far only tested with .mp3's, but other files should work too)
 //// 
-//// Once the sounds have been loaded into the engine, you can usee the same functions
+//// Once the sounds have been loaded into the engine, you can use the same functions
 //// to initiate, play and stop them, regardless of original format.
 //// 
 //// To load sounds into the engine, you will need to specify paths to the files containing them
